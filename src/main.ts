@@ -1,4 +1,5 @@
 import './style.css'
+import 'modern-css-reset'
 import {InputToHue} from "./converter.ts";
 
 const createHeader = (parent:HTMLDivElement) =>{
