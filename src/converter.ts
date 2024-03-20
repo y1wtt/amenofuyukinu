@@ -45,3 +45,36 @@ export const InputToHue = (inputText:String):number|undefined =>{
     console.log(b)
     return rgbToHue(r,g,b)
 }
+
+const NumberToHex = (el:number) => {
+    return Math.round(el * 255).toString(16)
+}
+
+export const HSBToColorCode = (h:number,s:number,l:number) =>{
+    const H = parseInt(h.toString()) /360
+    const S = s/100
+    const L = l/100
+    let r, g, b;
+    console.log(`h:${H},S:${S},L:${L}`)
+
+    if(S == 0){
+        r = g = b = L; // achromatic
+    }else{
+        const hue2rgb = (p:number, q:number, t:number) => {
+            console.log(`${t}`)
+            if(t < 0) t += 1;
+            if(t > 1) t -= 1;
+            if(t < 1/6) return p + (q - p) * 6 * t;
+            if(t < 1/2) return q;
+            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        }
+
+        let q = L < 0.5 ? L * (1 + S) : L + S - L * S;
+        let p = 2 * L - q;
+        r = hue2rgb(p, q, H + 1/3);
+        g = hue2rgb(p, q, H);
+        b = hue2rgb(p, q, H - 1/3);
+    }
+    return `#${NumberToHex(r)}${NumberToHex(g)}${NumberToHex(b)}`
+}
