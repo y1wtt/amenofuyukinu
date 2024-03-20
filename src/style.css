@@ -38,3 +38,7 @@ html{
     width: 14em;
     text-align: center;
 }
+
+#matrix-entry-point{
+    margin-top: 2rem;
+}
