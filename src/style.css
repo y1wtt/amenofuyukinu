@@ -1,6 +1,9 @@
 html{
     font-size: 13px;
 }
+body {
+    background-color: #f3f3f6;
+}
 .flex {
     display: flex;
 }
@@ -37,6 +40,9 @@ html{
     font-size: 20px;
     width: 14em;
     text-align: center;
+    margin-top: 1rem;
+    border-radius: 3px;
+    border: solid 1px ;
 }
 
 #matrix-entry-point{
