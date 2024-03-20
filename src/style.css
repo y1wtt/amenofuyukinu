@@ -1,0 +1,16 @@
+.flex {
+    display: flex;
+}
+.cell {
+    height: 4rem;
+    width: 4rem;
+    margin: 1rem;
+}
+.color-element {
+    border-radius: 9999px;
+}
+.indicator{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
