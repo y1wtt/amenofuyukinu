@@ -1,16 +1,33 @@
+html{
+    font-size: 15px;
+}
 .flex {
     display: flex;
 }
 .cell {
-    height: 4rem;
-    width: 4rem;
     margin: 1rem;
 }
 .color-element {
+    width: 4rem;
+    height: 4rem;
     border-radius: 9999px;
 }
 .indicator{
+    width: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.indicator-x{
+    width: 4rem;
+}
+
+.indicator-y{
+    height: 4rem;
+
+}
+
+#rgb-input{
+    font-size: 20px;
+    width: 14em;
 }
