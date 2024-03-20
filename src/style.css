@@ -4,6 +4,12 @@ html{
 .flex {
     display: flex;
 }
+.flex-col {
+    flex-direction: column;
+}
+.flex-align-center{
+    align-items: center;
+}
 .cell {
     margin: 1rem;
 }
@@ -30,4 +36,5 @@ html{
 #rgb-input{
     font-size: 20px;
     width: 14em;
+    text-align: center;
 }
