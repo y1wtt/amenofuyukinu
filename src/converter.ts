@@ -40,9 +40,6 @@ export const InputToHue = (inputText:String):number|undefined =>{
     if (isNaN(r) || isNaN(g) || isNaN(b)){
         return
     }
-    console.log(r)
-    console.log(g)
-    console.log(b)
     return rgbToHue(r,g,b)
 }
 
@@ -51,7 +48,7 @@ const NumberToHex = (el:number) => {
 }
 
 export const HSBToColorCode = (h:number,s:number,l:number) =>{
-    const H = parseInt(h.toString()) /360
+    const H = h/360
     const S = s/100
     const L = l/100
     let r, g, b;
