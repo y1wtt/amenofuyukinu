@@ -44,7 +44,7 @@ export const InputToHue = (inputText:String):number|undefined =>{
 }
 
 const NumberToHex = (el:number) => {
-    return Math.round(el * 255).toString(16)
+    return Math.round(el * 255).toString(16).padStart(2,'0')
 }
 
 export const HSBToColorCode = (h:number,s:number,l:number) =>{
