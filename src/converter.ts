@@ -23,7 +23,6 @@ const RGBHexToDec = (hexStr:string):number => {
     return parseInt(hexStr,16)
 }
 export const InputToHue = (inputText:String):number|undefined =>{
-    console.log(inputText)
     const trimInput = inputText.trim()
     let formattedInput:String = "";
 
@@ -44,34 +43,63 @@ export const InputToHue = (inputText:String):number|undefined =>{
 }
 
 const NumberToHex = (el:number) => {
-    return Math.round(el * 255).toString(16).padStart(2,'0')
+    return Math.round(el).toString(16).padStart(2,'0')
 }
 
-export const HSBToColorCode = (h:number,s:number,l:number) =>{
-    const H = h/360
-    const S = s/100
-    const L = l/100
-    let r, g, b;
-    console.log(`h:${H},S:${S},L:${L}`)
+export const HSBToRGB = (h:number, s:number, v:number) => {
+    let r, g, b, i, f, p, q, t;
+    h = Math.max(0, Math.min(360, h));
+    s = Math.max(0, Math.min(1, s));
+    v = Math.max(0, Math.min(1, v));
 
-    if(S == 0){
-        r = g = b = L; // achromatic
-    }else{
-        const hue2rgb = (p:number, q:number, t:number) => {
-            console.log(`${t}`)
-            if(t < 0) t += 1;
-            if(t > 1) t -= 1;
-            if(t < 1/6) return p + (q - p) * 6 * t;
-            if(t < 1/2) return q;
-            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-            return p;
-        }
-
-        let q = L < 0.5 ? L * (1 + S) : L + S - L * S;
-        let p = 2 * L - q;
-        r = hue2rgb(p, q, H + 1/3);
-        g = hue2rgb(p, q, H);
-        b = hue2rgb(p, q, H - 1/3);
+    if(s === 0) {
+        // Achromatic (grey)
+        r = g = b = v;
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
     }
+
+    h /= 60; // sector 0 to 5
+    i = Math.floor(h);
+    f = h - i; // factorial part of h
+    p = v * (1 - s);
+    q = v * (1 - s * f);
+    t = v * (1 - s * (1 - f));
+
+    switch(i) {
+        case 0:
+            r = v;
+            g = t;
+            b = p;
+            break;
+        case 1:
+            r = q;
+            g = v;
+            b = p;
+            break;
+        case 2:
+            r = p;
+            g = v;
+            b = t;
+            break;
+        case 3:
+            r = p;
+            g = q;
+            b = v;
+            break;
+        case 4:
+            r = t;
+            g = p;
+            b = v;
+            break;
+        default: // case 5:
+            r = v;
+            g = p;
+            b = q;
+    }
+
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+export const RGBToColorCode = (r:number, g:number, b:number) =>{
     return `#${NumberToHex(r)}${NumberToHex(g)}${NumberToHex(b)}`
 }

@@ -1,6 +1,6 @@
 import './style.css'
 import 'modern-css-reset'
-import {HSBToColorCode, InputToHue} from "./converter.ts";
+import {RGBToColorCode, InputToHue,HSBToRGB } from "./converter.ts";
 
 const createHeader = (parent:HTMLDivElement) =>{
     const rowEl = document.createElement("div")
@@ -31,11 +31,12 @@ const createColorMatrix = (e:String) => {
             const colorEl = document.createElement("div");
             colorEl.className = 'cell color-element'
             const H = InputToHue(e)
-            const S = 5 + Math.max(i,j) * 10
-            const B = 5 + j*(5.5+(j-i)/2)
-            colorEl.style.background = `hsl(${H}deg,${S}%,${B}%)`
+            const S = .1 + .1 * i
+            const B = .1 + .1 * j
+            const [R,G,Bl] = HSBToRGB(H!,S,B)
+            colorEl.style.background = `rgb(${R},${G},${Bl})`
             colorEl.addEventListener('click',(_:MouseEvent) =>{
-                navigator.clipboard.writeText(HSBToColorCode(H!, S, B)).then(()  => console.log(`copied!: ${HSBToColorCode(H!, S, B)}`))
+                navigator.clipboard.writeText(RGBToColorCode(R, G, Bl)).then(()  => console.log(`copied!: ${RGBToColorCode(R, G, Bl)}`))
             })
             rowEl.appendChild(colorEl)
         }
